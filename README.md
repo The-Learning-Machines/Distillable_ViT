@@ -23,7 +23,7 @@ else :
 
 criterion = DistillationLoss(
     base_criterion, teacher, 'none', 0.5, 1.0
-)  #the args are distillation-type, distillation-alpha and distillation-tau, type = choices=['none', 'soft', 'hard']
+)  #the args are distillation-type, distillation-alpha and distillation-tau, type - choices=['none', 'soft', 'hard']
 ```
 ## TODO
 
