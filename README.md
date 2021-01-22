@@ -25,9 +25,9 @@ criterion = DistillationLoss(
     base_criterion, teacher, 'none', 0.5, 1.0
 )  #the args are distillation-type, distillation-alpha and distillation-tau, type - choices=['none', 'soft', 'hard']
 ```
-## TODO
+## Learning with Retrospection (LWR)
 
-Learning with Retrospection (LWR) - https://arxiv.org/abs/2012.13098
+Refer to - https://github.com/The-Learning-Machines/LearningWithRetrospection/blob/main/LearningWithRetrospection.py
 
 ## Citations
 
