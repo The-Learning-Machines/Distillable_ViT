@@ -7,6 +7,28 @@ A recent <a href="https://arxiv.org/abs/2012.12877">paper</a> has shown that use
 
 ex. distilling from Resnet50 (or any teacher) to a vision transformer
 
+## Usage of LSR (Label Smoothing)
+
+```python
+!pip install timm==0.3.2
+from timm.loss import LabelSmoothingCrossEntropy
+
+value = 0.1 #check which is fine
+smoothing = True
+
+if smoothing : 
+    base_criterion = LabelSmoothingCrossEntropy(smoothing = value)
+else : 
+    base_criterion = nn.CrossEntropyLoss()
+
+criterion = DistillationLoss(
+    base_criterion, teacher, 'none', 0.5, 1.0
+)  #the args are distillation-type, distillation-alpha and distillation-tau, type = choices=['none', 'soft', 'hard']
+```
+## TODO
+
+Learning with Retrospection (LWR) - https://arxiv.org/abs/2012.13098
+
 ## Citations
 
 Code base from - https://github.com/lucidrains/vit-pytorch
