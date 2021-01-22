@@ -13,21 +13,61 @@ ex. distilling from Resnet50 (or any teacher) to a vision transformer
 !pip install timm==0.3.2
 from timm.loss import LabelSmoothingCrossEntropy
 
-value = 0.1 #check which is fine
 smoothing = True
+retrospect = False
 
+value = 0.1 
 if smoothing : 
     base_criterion = LabelSmoothingCrossEntropy(smoothing = value)
+    
+elif retrospect: 
+    base_criterion = LWR(
+    k=1,
+    update_rate=0.9,
+    num_batches_per_epoch=len(train_data) // batch_size,
+    dataset_length=len(train_data),
+    output_shape=(2, ),
+    tau=5,
+    max_epochs=20,
+    softmax_dim=1
+)
+      
 else : 
     base_criterion = nn.CrossEntropyLoss()
 
 criterion = DistillationLoss(
-    base_criterion, teacher, 'none', 0.5, 1.0
-)  #the args are distillation-type, distillation-alpha and distillation-tau, type - choices=['none', 'soft', 'hard']
+    base_criterion, teacher, 'none', 0.5, 1.0, smoothing, retrospect)
 ```
-## Learning with Retrospection (LWR)
+## Usage of Learning with Retrospection (LWR)
 
 Refer to - https://github.com/The-Learning-Machines/LearningWithRetrospection/blob/main/LearningWithRetrospection.py
+
+```python
+smoothing = False
+retrospect = True
+
+value = 0.1 
+if smoothing : 
+    base_criterion = LabelSmoothingCrossEntropy(smoothing = value)
+    
+elif retrospect: 
+    base_criterion = LWR(
+    k=1,
+    update_rate=0.9,
+    num_batches_per_epoch=len(train_data) // batch_size,
+    dataset_length=len(train_data),
+    output_shape=(2, ),
+    tau=5,
+    max_epochs=20,
+    softmax_dim=1
+)
+      
+else : 
+    base_criterion = nn.CrossEntropyLoss()
+
+criterion = DistillationLoss(
+    base_criterion, teacher, 'none', 0.5, 1.0, smoothing, retrospect)
+```
 
 ## Citations
 
