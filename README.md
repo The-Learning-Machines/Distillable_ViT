@@ -1,6 +1,8 @@
 # Distillable_ViT
 A repository for the Distillable ViT, with and without Label Smoothing
 
+Weights can be downloaded from - https://drive.google.com/drive/folders/1iGew6DMDdIorm-f_73fvL8sYpMIiwIw6?usp=sharing
+
 ## Distillation
 
 A recent <a href="https://arxiv.org/abs/2012.12877">paper</a> has shown that use of a distillation token for distilling knowledge from convolutional nets to vision transformer can yield small and efficient vision transformers. This repository offers the means to do distillation easily.
